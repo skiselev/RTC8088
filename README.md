@@ -11,7 +11,7 @@ Real Time Clock for your PC XT. Very low profile, simple and open hardware.
 
 [PCB Layout - Version 3.0](KiCad/RTC8088-Board-3.0.pdf)
 
-### Swiches and Jumpers
+### Switches and Jumpers
 
 #### SW1 - RTC I/O address select
 
@@ -62,7 +62,26 @@ IC Socket          | U2        | 24 pin DIP, 2.54 mm pitch, 15.24 mm row spacing
 
 ## Software
 
-The board is supported by the [8088 BIOS](https://github.com/skiselev/8088_bios) and [GLaTICK BIOS Extension](https://github.com/640-KB/GLaTICK).
+The board is supported by the [DSCLOCK.SYS](software) DOS driver, the [8088 BIOS](https://github.com/skiselev/8088_bios), and the [GLaTICK BIOS Extension](https://github.com/640-KB/GLaTICK).
+
+### DSCLOCK.SYS Usage Information
+
+[DSCLOCK.SYS](software) is an MS-DOS / PC DOS clock driver for DS12885 and DS12887 based real time clock controllers.
+
+Add the following line to the CONFIG.SYS to use this driver:
+
+```
+DEVICE=[PATH]DSCLOCK.SYS [PORT] [/D]
+```
+Where:
+* PATH - Drive and path to the driver, e.g., C:\DRIVERS\
+* PORT - Decimal or hexadecimal port number. Use C notation (0x) for hexadecimal numbers, e.g., 0x240
+* /D - DST enable flag. If enabled, the RTC controller will automatically adjust the clock for daylight saving time. Note that DS12885/DS12887 support North American DST switch rules, so it is not very useful for the rest of the world
+
+Usage example:
+```
+DEVICE=C:\DRIVERS\DSCLOCK.SYS 0x240
+```
 
 ## Release Notes
 
